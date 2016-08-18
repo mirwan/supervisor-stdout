@@ -19,7 +19,9 @@ def main():
 def event_handler(event, response):
     line, data = response.split('\n', 1)
     headers = dict([ x.split(':') for x in line.split() ])
-    eval("write_%s(%s)" % (headers['channel'],"'%s|%s'%(headers['processname'], data)"))
+    lines = data.split('\n')
+    for l in lines:
+        eval("write_%s(%s)" % (headers['channel'],"'%s|%s'%(headers['processname'], l)"))
 
 if __name__ == '__main__':
     main()
