@@ -21,7 +21,7 @@ def event_handler(event, response):
     headers = dict([ x.split(':') for x in line.split() ])
     lines = data.split('\n')
     for l in lines:
-        eval("write_%s(%s)" % (headers['channel'],"'%s|%s'%(headers['processname'], l)"))
+        eval("write_%s(%s)" % (headers['channel'],"'%s|%s\n'%(headers['processname'], l)"))
 
 if __name__ == '__main__':
     main()
