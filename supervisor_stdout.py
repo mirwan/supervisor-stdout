@@ -17,11 +17,11 @@ def main():
         write_stdout('RESULT %s\n%s'%(len(data.encode("utf-8")), data)) # transition from READY to ACKNOWLEDGED
 
 def event_handler(event, response):
-    line, data = response.split('\n', 1)
+    line, data = response.decode().split('\n', 1)
     headers = dict([ x.split(':') for x in line.split() ])
     lines = data.split('\n')
     for l in lines:
-        if l:
+        if l.rstrip():
             eval("write_%s(%s)" % (headers['channel'],"'%s|%s\\n'%(headers['processname'], l)"))
 
 if __name__ == '__main__':
